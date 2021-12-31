@@ -11,9 +11,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field'; //group materials
 import { MatInputModule } from '@angular/material/input'; // create an input field
 import { MatCheckboxModule } from '@angular/material/checkbox'; // check box
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
+
 import { FormsModule } from '@angular/forms';  // support forms
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { ReactiveFormsModule } from '@angular/forms'; 
 
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
@@ -50,6 +54,7 @@ import { LoginComponent } from './login/login.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     MatToolbarModule,
     MatListModule,
@@ -59,7 +64,9 @@ import { LoginComponent } from './login/login.component';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSelectModule,
+    MatSlideToggleModule
 
   ],
   providers: [
