@@ -28,5 +28,11 @@ export class DishService {
       // return Promise.resolve(DISHES.filter((dish) => dish.featured)[0]);
       return of (DISHES.filter((dish) => dish.featured)[0]).pipe(delay(2000));// for Rxjs
   }
+  
+  //return all the dish IDs for all the dishes
+  getDishIds(): Observable<string[] | any>{
+    return of(DISHES.map(dish=>dish.id));
+
+  }
 
 }
