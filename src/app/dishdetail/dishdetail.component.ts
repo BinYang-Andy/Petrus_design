@@ -63,15 +63,16 @@ import {Comment } from '../shared/comment';
 export class DishdetailComponent implements OnInit {
 
   // @Input()
+  d:Date;
+  showDate:string;
   dish:Dish;
   errMess:string;
   dishIds:string[];
   prev:string;
   next:string;
-  d:Date;       // const d = new Date()         
-  showDate:string; //let showD = d.toISOString()
   commentForm: FormGroup;
   comment:Comment;
+  dishcopy: Dish;
   
 
 
@@ -119,7 +120,7 @@ export class DishdetailComponent implements OnInit {
    this.dishService.getDishIds()
       .subscribe((dishIds) => this.dishIds = dishIds);
    this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id);},
+      .subscribe(dish => { this.dish = dish; this.dishcopy= dish; this.setPrevNext(dish.id);},
       errmess => this.errMess =<any>errmess);
   }
 
@@ -138,35 +139,58 @@ export class DishdetailComponent implements OnInit {
   createForm2(){
     this.commentForm = this.fb.group({
       author:['',[Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
-      rating:[5, [Validators.required]],
-      // rating:'',
-      comment:['',[Validators.required]],
+      rating:5,
+      comment:['',Validators.required],
       date:''
-      
+    
     });
+
+    this.commentForm.valueChanges
+      .subscribe(data => this.onValueChanged(data));
+
+    this.onValueChanged(); //(re)set form validation messages
   }
 
 
+
   onSubmit(){
-    this.d= new Date();
+
+    this.d = new Date();
     this.showDate = this.d.toISOString();
-
     this.commentForm.value.date = this.showDate;
-
     this.comment = this.commentForm.value;
-
     console.log(this.comment);
-
-    this.dish.comments.push(this.comment);
-
+    this.dishcopy.comments.push(this.comment);
+    this.dishService.putDish(this.dishcopy)
+      .subscribe(dish=>{
+        this.dish = dish; this.dishcopy = dish;
+      }, 
+      errmess => {this.dish =null, this.dishcopy = null; this.errMess = <any>errmess});
+    this.commentFormDirective.resetForm();
     this.commentForm.reset({
       author:'',
       rating:5,
       comment:'',
-      date:''
     })
-    this.commentFormDirective.resetForm();
-
+  }
+  onValueChanged(data?: any){
+    if(!this.commentForm){ return; }
+    const form = this.commentForm;
+    for (const field in this.formErrors){
+      if(this.formErrors.hasOwnProperty(field)){
+        //clear pervious error message(if any)
+        this.formErrors[field] = '';
+        const control = form.get(field);
+        if(control && control.dirty && !control.valid){
+          const messages = this.vaildationMessages[field];
+          for(const key in control.errors){
+            if (control.errors.hasOwnProperty(key)){
+              this.formErrors[field] += messages[key] + ' ';
+            }
+          }
+        }
+      }
+    }
   }
 
 }
