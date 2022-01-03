@@ -1,9 +1,13 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { Params, ActivatedRoute} from '@angular/router';
 import { Location} from '@angular/common';
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 import { switchMap } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Comment } from '../shared/comment';
+
+
 
 
 
@@ -63,10 +67,49 @@ export class DishdetailComponent implements OnInit {
   dishIds:string[];
   prev:string;
   next:string;
+  d:Date;       // const d = new Date()         
+  showDate:string; //let showD = d.toISOString()
+  commentForm: FormGroup;
+  comment:Comment;
+  
+
+
+  @ViewChild('commform') commentFormDirective;
+
+  formErrors ={
+    'author':'',
+    'rating':'',
+    'comment':'',
+    'date':''
+  };
+
+  vaildationMessages = {
+    'author':{
+      'required':'Author name is required',
+      'minlength':'Author name must be at least 2 characters long',
+      'maxlength':'Author name cannot be more than 25 character long'
+    },
+    'comment':{
+      'required':'Comment is required'
+
+    }
+
+  }
+
+  formatLabel(value: number) {
+    if (value >= 1) {
+      return Math.round(value / 1);
+    }
+    return value;
+  }
+
 
   constructor(private dishService:DishService,
               private location: Location,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private fb: FormBuilder) {
+              this.createForm2();
+               }
 
   ngOnInit() {
    this.dishService.getDishIds()
@@ -84,6 +127,40 @@ export class DishdetailComponent implements OnInit {
 
   goBack(): void{
     this.location.back();
+  }
+
+  createForm2(){
+    this.commentForm = this.fb.group({
+      author:['',[Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
+      rating:[5, [Validators.required]],
+      // rating:'',
+      comment:['',[Validators.required]],
+      date:''
+      
+    });
+  }
+
+
+  onSubmit(){
+    this.d= new Date();
+    this.showDate = this.d.toISOString();
+
+    this.commentForm.value.date = this.showDate;
+
+    this.comment = this.commentForm.value;
+
+    console.log(this.comment);
+
+    this.dish.comments.push(this.comment);
+
+    this.commentForm.reset({
+      author:'',
+      rating:5,
+      comment:'',
+      date:''
+    })
+    this.commentFormDirective.resetForm();
+
   }
 
 }

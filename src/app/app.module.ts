@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input'; // create an input fie
 import { MatCheckboxModule } from '@angular/material/checkbox'; // check box
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 import { FormsModule } from '@angular/forms';  // support forms
@@ -66,7 +67,8 @@ import { LoginComponent } from './login/login.component';
     MatInputModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSliderModule
 
   ],
   providers: [
