@@ -32,6 +32,8 @@ fxLayoutGap.xs="0">
         </button>
       </mat-card-actions>
     </mat-card>
+   
+ 
   </div>
 
 
@@ -47,6 +49,7 @@ fxLayoutGap.xs="0">
                   </p>
               </mat-list-item>
           </mat-list>
+          
           <mat-list *ngIf="commentForm.valid">
             <mat-list-item>
               <h4 matLine>{{commentForm.get('comment').value}}</h4>
@@ -56,6 +59,7 @@ fxLayoutGap.xs="0">
               </p>
             </mat-list-item>
           </mat-list>
+        
           <form novalidate [formGroup]="commentForm" #commform="ngForm" (ngSubmit)="onSubmit()">
             <p>
               <mat-form-field class="full-width">
@@ -73,5 +77,8 @@ fxLayoutGap.xs="0">
           </form>
 
 
+  </div>
+  <div [hidden]="dish">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
 </div>

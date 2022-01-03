@@ -17,6 +17,7 @@ import { MatSliderModule } from '@angular/material/slider';
 
 
 import { FormsModule } from '@angular/forms';  // support forms
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http';
@@ -74,7 +75,8 @@ import { HttpModule } from '@angular/http';
     MatSlideToggleModule,
     MatSliderModule,
     HttpClientModule,
-    HttpModule 
+    HttpModule,
+    MatProgressSpinnerModule
 
   ],
   providers: [
