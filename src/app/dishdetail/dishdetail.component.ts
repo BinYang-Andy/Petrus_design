@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild,Inject, Input} from '@angular/core';
 import { Params, ActivatedRoute} from '@angular/router';
 import { Location} from '@angular/common';
 import { Dish } from '../shared/dish';
@@ -107,11 +107,14 @@ export class DishdetailComponent implements OnInit {
   constructor(private dishService:DishService,
               private location: Location,
               private route: ActivatedRoute,
-              private fb: FormBuilder) {
-              this.createForm2();
+              private fb: FormBuilder,
+              @Inject('BaseURL') private BaseURL) {
+              
                }
 
-  ngOnInit() {
+  ngOnInit() {  
+    
+   this.createForm2();
    this.dishService.getDishIds()
       .subscribe((dishIds) => this.dishIds = dishIds);
    this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
@@ -123,6 +126,7 @@ export class DishdetailComponent implements OnInit {
     this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
     this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
   }
+
 
 
   goBack(): void{

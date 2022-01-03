@@ -19,6 +19,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';  // support forms
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms'; 
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
@@ -37,6 +39,8 @@ import { ContactComponent } from './contact/contact.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
+import { baseURL} from './shared/baseurl';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -68,13 +72,16 @@ import { LoginComponent } from './login/login.component';
     MatCheckboxModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatSliderModule
+    MatSliderModule,
+    HttpClientModule,
+    HttpModule 
 
   ],
   providers: [
     DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    {provide: 'BaseURL', useValue: baseURL}
   ],
   entryComponents:[
     LoginComponent

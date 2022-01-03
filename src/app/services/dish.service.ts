@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Dish} from '../shared/dish';
-import { DISHES } from '../shared/dishes';
+// import { DISHES } from '../shared/dishes';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { HttpClient} from '@angular/common/http';
+import { baseURL } from '../shared/baseurl';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,27 +14,32 @@ export class DishService {
 
 
 
-  constructor() { }
+  constructor( private http: HttpClient) { }
 
 
   getDishes():Observable<Dish[]>{
     // return Promise.resolve(DISHES);
-    return of (DISHES).pipe(delay(2000));  // for Rxjs
+    // return of (DISHES).pipe(delay(2000));  // for Rxjs
+    return this.http.get<Dish[]>(baseURL +'dishes'); //Angular HTTP Client
   }
 
   getDish(id:string):Observable<Dish>{
       // return Promise.resolve(DISHES.filter((dish)=> (dish.id === id))[0]);
-      return of (DISHES.filter((dish)=> (dish.id === id))[0]).pipe(delay(2000));// for Rxjs
-  }
+      // return of (DISHES.filter((dish)=> (dish.id === id))[0]).pipe(delay(2000));// for Rxjs
+      return this.http.get<Dish>(baseURL +'dishes/' + id);
+    }
 
   getFeaturedDish():Observable<Dish>{
       // return Promise.resolve(DISHES.filter((dish) => dish.featured)[0]);
-      return of (DISHES.filter((dish) => dish.featured)[0]).pipe(delay(2000));// for Rxjs
-  }
+      // return of (DISHES.filter((dish) => dish.featured)[0]).pipe(delay(2000));// for Rxjs
+      return this.http.get<Dish[]>(baseURL +'dishes?featured=true')
+      .pipe(map(dishes=> dishes[0]));
+    }
   
   //return all the dish IDs for all the dishes
   getDishIds(): Observable<string[] | any>{
-    return of(DISHES.map(dish=>dish.id));
+    // return of(DISHES.map(dish=>dish.id));
+    return this.getDishes().pipe(map(dishes=> dishes.map(dish=>dish.id)));
 
   }
 
