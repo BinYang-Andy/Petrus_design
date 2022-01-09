@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 
+
 import { MatFormFieldModule } from '@angular/material/form-field'; //group materials
 import { MatInputModule } from '@angular/material/input'; // create an input field
 import { MatCheckboxModule } from '@angular/material/checkbox'; // check box
@@ -79,7 +80,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     MatSliderModule,
     HttpClientModule,
     HttpModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
 
   ],
   providers: [

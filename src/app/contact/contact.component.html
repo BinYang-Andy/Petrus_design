@@ -39,8 +39,8 @@
   <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your Feedback</h3>
     <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
-
-    <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+      <div [hidden]="showSpinner" >
+    <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()" >
       <!-- <p>
         <mat-form-field class="half-width">
           <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
@@ -85,7 +85,7 @@
 
     <p>
       <mat-form-field class="half-width">
-        <input matInput formControlName="telnum" placeholder="Tel. Number" type="tel" pattern="[0-9]*" required>
+        <input matInput  formControlName="telnum" placeholder="Tel. Number" type="tel" pattern="[0-9]*" required>
         <mat-error *ngIf="formErrors.telnum">{{formErrors.telnum}}</mat-error>
       </mat-form-field>
       <mat-form-field class="half-width">
@@ -98,10 +98,10 @@
 
       <table class="form-size">
         <td>
-          <mat-slide-toggle formControlName="agree">May we contact you?</mat-slide-toggle>
+          <mat-slide-toggle  formControlName="agree">May we contact you?</mat-slide-toggle>
         </td>
         <td>
-          <mat-select placeholder="How?" formControlName="contacttype">
+          <mat-select placeholder="How?"  formControlName="contacttype">
             <mat-option *ngFor="let ctype of contactType" [value]="ctype">
               {{ ctype }}
             </mat-option>
@@ -114,7 +114,32 @@
         </mat-form-field>
       </p>
       <button type="submit" mat-button class="background-primary text-floral-white"
-      [disabled]="feedbackForm.invalid">Submit</button>
+      [disabled]="feedbackForm.invalid" (click)="loadData()">Submit</button>
     </form>
+
+      </div>
+    <div *ngIf="showSpinner">
+      <h4>Submitting Form</h4>
+      <mat-spinner></mat-spinner>
+      
+    </div>
+
+
   </div>
+  <div fxFlex  class="form-size" *ngIf="showForm">
+          
+    <h3>Your Submission</h3>
+    <p matLine>First Name:{{feedbackForm.get('firstname').value}} </p>
+    <p matLine>Last Name:{{feedbackForm.get('lastname').value}} </p>
+    <p matLine>Tel.Number:{{feedbackForm.get('telnum').value}} </p>
+    <p matLine> Email:{{feedbackForm.get('email').value}} </p>
+    <p matLine>Contact You:{{feedbackForm.get('agree').value}} </p>
+    <p matLine>How?:{{feedbackForm.get('contacttype').value}} </p>
+    <p matLine>Feedback:{{feedbackForm.get('message').value}} </p>
+  
+</div>
+       
+
+  
+  
 </div>

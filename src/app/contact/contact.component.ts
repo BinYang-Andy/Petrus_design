@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder,FormGroup, Validators} from '@angular/forms';
+import { FormBuilder,FormGroup, NgForm, Validators} from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
 import { flyInOut } from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
+import { baseURL } from '../shared/baseurl';
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -21,7 +24,9 @@ export class ContactComponent implements OnInit {
   feedback:Feedback;      // declare a var  feedback of the type of feedback
                           //later on this feedback value can be fetched from server
   contactType = ContactType;
-
+  showSpinner = false;
+  showForm = false;
+ 
   @ViewChild('fform') feedbackFormDirective;
 
   formErrors ={
@@ -52,11 +57,15 @@ export class ContactComponent implements OnInit {
     },
   }
 
-  constructor(private fb: FormBuilder) {
-        this.createForm();
+  constructor(private fb: FormBuilder,
+              private feedbackService: FeedbackService) {
+        
    }
 
   ngOnInit() {
+    this.createForm();
+    // this.feedbackService.getFeedback()
+    //   .subscribe(feedback=>this.feedback=feedback)
   }
 
   createForm(){
@@ -98,8 +107,13 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
-    this.feedbackForm.reset({
+    console.log(this.feedback, this.showForm=true);
+    setTimeout(()=>{
+      this.showForm = false
+    },5000)
+    this.feedbackService.addFeedback(this.feedback)
+    .subscribe(feedback=>this.feedback);
+   this.feedbackForm.reset({
       firstname:'',
       lastname:'',
       telnum:0,
@@ -111,4 +125,11 @@ export class ContactComponent implements OnInit {
     this.feedbackFormDirective.resetForm();
   }
 
+  loadData(){
+    this.showSpinner = true;
+    
+    setTimeout(()=>{
+      this.showSpinner = false;
+    }, 2000);
+  }
 }
