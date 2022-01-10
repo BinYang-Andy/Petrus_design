@@ -40,7 +40,7 @@
     <h3>Send us your Feedback</h3>
     <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
       <div [hidden]="showSpinner" >
-    <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()" >
+    <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()" *ngIf="showForm" >
       <!-- <p>
         <mat-form-field class="half-width">
           <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
@@ -121,21 +121,18 @@
     <div *ngIf="showSpinner">
       <h4>Submitting Form</h4>
       <mat-spinner></mat-spinner>
-      
     </div>
-
-
   </div>
-  <div fxFlex  class="form-size" *ngIf="showForm">
+  <div fxFlex  class="form-size" *ngIf="aftersubmit">
           
     <h3>Your Submission</h3>
-    <p matLine>First Name:{{feedbackForm.get('firstname').value}} </p>
-    <p matLine>Last Name:{{feedbackForm.get('lastname').value}} </p>
-    <p matLine>Tel.Number:{{feedbackForm.get('telnum').value}} </p>
-    <p matLine> Email:{{feedbackForm.get('email').value}} </p>
-    <p matLine>Contact You:{{feedbackForm.get('agree').value}} </p>
-    <p matLine>How?:{{feedbackForm.get('contacttype').value}} </p>
-    <p matLine>Feedback:{{feedbackForm.get('message').value}} </p>
+    <p matLine>First Name:{{aftersubmit.firstname}} </p>
+    <p matLine>Last Name:{{aftersubmit.lastname}} </p>
+    <p matLine>Tel.Number:{{aftersubmit.telnum}} </p>
+    <p matLine> Email:{{aftersubmit.email}} </p>
+    <p matLine>Contact You:{{aftersubmit.agree}} </p>
+    <p matLine>How?:{{aftersubmit.contacttype}} </p>
+    <p matLine>Feedback:{{aftersubmit.message}} </p>
   
 </div>
        

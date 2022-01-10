@@ -25,7 +25,8 @@ export class ContactComponent implements OnInit {
                           //later on this feedback value can be fetched from server
   contactType = ContactType;
   showSpinner = false;
-  showForm = false;
+  showForm = true;
+  aftersubmit= null;
  
   @ViewChild('fform') feedbackFormDirective;
 
@@ -107,12 +108,16 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.feedback = this.feedbackForm.value;
-    console.log(this.feedback, this.showForm=true);
-    setTimeout(()=>{
-      this.showForm = false
-    },5000)
+    console.log(this.feedback);
+    this.showForm = false;
     this.feedbackService.addFeedback(this.feedback)
-    .subscribe(feedback=>this.feedback);
+    .subscribe(feedback=>{
+      this.aftersubmit = feedback;
+      this.feedback = null;
+      setTimeout(()=>{
+        this.aftersubmit = null; this.showForm = true
+      },5000)
+    });
    this.feedbackForm.reset({
       firstname:'',
       lastname:'',
