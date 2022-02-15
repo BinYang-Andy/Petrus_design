@@ -1,9 +1,9 @@
 $lt-gray: #ddd;
-$background-dark: #512da8;
-$background-light: #9575cd;
-$background-pale: #d1c4e9;
-$background-moredark: #4527a0;
-
+$background-dark: rgb(255, 255, 255);
+$background-light: rgb(247, 247, 247);
+$background-pale: floralwhite;
+$background-moredark: #e9e9e9e7;
+$primary-color-dark: black;
 @mixin zero-margin($pad-up-down, $pad-left-right) {
   margin: 0px auto;
   padding: $pad-up-down $pad-left-right;
@@ -12,9 +12,12 @@ $background-moredark: #4527a0;
 .jumbotron {
   @include zero-margin(70px, 30px);
   background: $background-light;
-  color: floralwhite;
+  color: black;
   min-height: 150px;
 }
 .active {
   background: $background-moredark;
+}
+.hr {
+  border: 1px solid $primary-color-dark;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
-
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,15 +9,29 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 export class LoginComponent implements OnInit {
 
   user = {username:'',password:'', remember: false};
+  errMess:string;
 
-  constructor(public dialogRef:MatDialogRef<LoginComponent>) { } //<LoginComponets is the reference to a dialog opened>
+  constructor(public dialogRef:MatDialogRef<LoginComponent>,
+              public authService:AuthService) { } //<LoginComponets is the reference to a dialog opened>
 
   ngOnInit() {
   }
 
   onSubmit(){ 
      console.log('User: ', this.user);
-     this.dialogRef.close(); // when close it, we also want to dismiss the component here.
+     this.authService.logIn(this.user)
+      .subscribe(res=>{
+        if(res.success){
+        this.dialogRef.close(res.success);
+      } else {
+        console.log(res);
+      }
+    },
+    error=>{
+      console.log(error);
+      this.errMess=error;
+    });
+  
   }
 
 }

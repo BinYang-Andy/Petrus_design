@@ -1,11 +1,14 @@
-<mat-toolbar color="primary">
-  <span><img src="/assets/images/logo.png" height=30 width=41></span>
+<mat-toolbar color=#000000>
+  <span><img src="/assets/images/petrus.png" height=50 width=50></span>
   <a mat-button routerLink='/home' routerLinkActive='active'><span class="fa fa-home fa-lg"></span> Home</a>
   <a mat-button routerLink="/aboutus"routerLinkActive='active'><span class="fa fa-info fa-lg"></span> About</a>
   <a mat-button routerLink='/menu' routerLinkActive='active'><span class="fa fa-list fa-lg"></span> Menu</a>
+  <a mat-button routerLink='/favorite' routerLinkActive='active'><span class="fa fa-heart fa-lg"></span> My Favorites</a>
   <a mat-button routerLink='/contactus' routerLinkActive='active'><span class="fa fa-address-card fa-lg"></span> Contact</a>
   <span class="flex-spacer"></span>
-  <a mat-button (click)="openLoginForm()"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+  <a *ngIf="!username" mat-button (click)="openLoginForm()"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+  <a *ngIf="username">{{username}}</a>
+  <a *ngIf="username" mat-button (click)="logOut()"><span class="fa fa-sign-out fa-lg"></span> Logout</a>
 </mat-toolbar>
 
 <div class="container jumbotron"
@@ -18,12 +21,12 @@
     fxLayoutGap="10px">
 
   <div fxFlex fxFlex.gt-sm="50%">
-    <h1>Ristorante Con Fusion</h1>
-    <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations
-      will tickle your culinary senses!</p>
+    <h1>Pétrus by Gordon Ramsay</h1>
+    <p>Set in the heart of Knightsbridge, Michelin-starred Pétrus by Gordon Ramsay offers an exquisite menu of innovative and classic French dishes, alongside an award-winning wine list. </p>
   </div>
   <div fxFlex fxFlex.gt-sm="20%">
-    <img src="/assets/images/logo.png" alt="Logo">
+    <img src="/assets/images/petrus.png" alt="Logo" height=200 width=200>
   </div>
-  <div fxFlex></div>
+  <div fxFlex ></div>
+  <hr> 
 </div>

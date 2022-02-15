@@ -3,43 +3,43 @@ import { Leader} from './leader';
 export const LEADERS : Leader[] = [
     {
       id: '0',
-      name: 'Peter Pan',
-      image: '/assets/images/alberto.png',
-      designation: 'Chief Epicurious Officer',
-      abbr: 'CEO',
+      name: 'Matt Abé',
+      image: '/assets/images/matt.jpg',
+      designation: 'Chef Patron',
+      abbr: 'MA',
       featured: false,
       // tslint:disable-next-line:max-line-length
-      description: 'Our CEO, Peter, credits his hardworking East Asian immigrant parents who undertook the arduous journey to the shores of America with the intention of giving their children the best future. His mother\'s wizardy in the kitchen whipping up the tastiest dishes with whatever is available inexpensively at the supermarket, was his first inspiration to create the fusion cuisines for which The Frying Pan became well known. He brings his zeal for fusion cuisines to this restaurant, pioneering cross-cultural culinary connections.'
+      description: 'Matt Abé has spent more than a decade rising through the ranks of Gordon Ramsay Restaurants in London, where he now holds the position of Chef Patron at the prestigious three Michelin-starred Restaurant Gordon Ramsay.'
     },
     {
       id: '1',
-      name: 'Dhanasekaran Witherspoon',
-      image: '/assets/images/alberto.png',
-      designation: 'Chief Food Officer',
-      abbr: 'CFO',
+      name: 'Jean-Claude Breton',
+      image: '/assets/images/jean.jpg',
+      designation: 'Maitre d',
+      abbr: 'JCB',
       featured: false,
       // tslint:disable-next-line:max-line-length
-      description: 'Our CFO, Danny, as he is affectionately referred to by his colleagues, comes from a long established family tradition in farming and produce. His experiences growing up on a farm in the Australian outback gave him great appreciation for varieties of food sources. As he puts it in his own words, Everything that runs, wins, and everything that stays, pays!'
+      description: 'Maitre d Jean-Claude Breton initially met Gordon in France and joined him for the opening of Aubergine in London in 1993. Their relationship grew over the years and he is now absorbed in ensuring the utmost care and service for guests dining at Restaurant Gordon Ramsay!'
     },
     {
       id: '2',
-      name: 'Agumbe Tang',
-      image: '/assets/images/alberto.png',
-      designation: 'Chief Taste Officer',
-      abbr: 'CTO',
+      name: 'James Lloyd',
+      image: '/assets/images/james.jpg',
+      designation: 'Head Sommelier',
+      abbr: 'JL',
       featured: false,
       // tslint:disable-next-line:max-line-length
-      description: 'Blessed with the most discerning gustatory sense, Agumbe, our CFO, personally ensures that every dish that we serve meets his exacting tastes. Our chefs dread the tongue lashing that ensues if their dish does not meet his exacting standards. He lives by his motto, You click only if you survive my lick.'
+      description: 'Following a successful career at London’s most impressive establishments, James Lloyd joined Restaurant Gordon Ramsay as Head Sommelier in February 2016. His third appointment within Gordon Ramsay Restaurants.'
     },
     {
       id: '3',
-      name: 'Alberto Somayya',
-      image: '/assets/images/alberto.png',
+      name: 'Gordon Ramsay',
+      image: '/assets/images/GR2.jpg',
       designation: 'Executive Chef',
-      abbr: 'EC',
+      abbr: 'GR',
       featured: true,
       // tslint:disable-next-line:max-line-length
-      description: 'Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. He says, Put together the cuisines from the two craziest cultures, and you get a winning hit! Amma Mia!'
+      description: 'Gordon Ramsay was brought up in Stratford-upon-Avon, England, and initially aspired to be a professional footballer. However, when an injury prematurely put an end to any hopes of a promising career on the pitch, Ramsay went back to college to complete a course in hotel management. '
     }
   ];
 
